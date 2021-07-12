@@ -1,0 +1,22 @@
+﻿German Research Center for Artificial Intelligence
+PROWIT - Web 2.0 in Business Processes
+Internet-based communication- and cooperation services, especially Web 2.0-applications, offer broad potential for the optimization of business processes. The PROWIT project (Process-oriented Web 2.0-based Integrated Telecommunication service) intends to test and evaluate these opportunities.
+Based on a Process Collaboration Platform (PCP), communication- and cooperation services shall be brought together in order to allow the process participants to communicate in a timely, result-oriented and context-based manner. The PCP facilitates access on documented process knowledge and a co-operant expansion of the knowledge basis relevant for the process community. The platform-integrated software and hardware sensors, e.g. in intelligent mobile terminal devices, make it possible to automatically retrieve contextual information from the process participants, supporting communication adjusted to the respective situation.
+Application scenarios by means of which the PCP is being developed and tested in the PROWIT project originate from the areas of Supply Chain Management (SCM), Hybrid Value Added and IT Service Management. This ensures the flexible versatility in different contexts, additionally fostered by the choice and usage of external application scenarios.
+At present, PROWIT peculiarly investigates an application scenario of Hybrid Added Value, in which products and their related customer services are combined. Machines delivered to a customer's manufacturing are being sold together with a service package that comprises the surveillance and the warranty of functionality of a machine by monitoring, early reactions on foreseeable outages and the short-dated
+reaction on unforeseeable problems. In such cases additional dynamic and unforeseen emergency situations can occur that affect the timely and correct handling of the service process, like the drop out of communication networks, problems of accessibility, or faulty operations and reaction by the staff. PROWIT intends to make failure dynamics manageable using Web 2.0 technologies. For this reason, a prototype based on the open source system Liferay is being developed.
+Additionally, centrally stored data used for cooperation with suppliers will be maintained in Wikis, social tagging and bookmarking functions ensure the retrieval of documents critical for the process, responsibilities can be inquired searching the documentations of the process community. Escalations of production problems can be performed context-based and timely using integrated communication technologies like VoIP, Instant Messaging, or mobile telephony.
+The PROWIT project has started in January 2009 and will run for 3 years. It is funded by the Federal Ministry of Education and Research (BMBF) under the identification FKZ 01BS0833.
+More information
+http://iwi.dfki.de http://prowit-projekt.de
+Contact
+Prof. Dr. Peter Loos
+Head of the Institute for Information Systems (IWi) at DFKI
+PD Dr. Peter Fettke
+Institute for Information Systems (IWi) at DFKI E-mail: [Peter.Loos | Peter.Fettke]@dfki.de Phone: +49 (0)681 302-3106
+Imprint
+Issue 25, February 2010, ISSN 1615-5769
+Published by: German Research Center for Artificial Intelligence GmbH (DFKI)
+Editorial staff: Heike Leonhard, Michael Bruss, Christof Burgard, Reinhard Karger, Franziska Martin, Helga Riedel, Udo Urban Address: Campus D3 2, D-66123 Saarbrucken, E-mail: uk@dfki.de, Phone: +49 (0)681 302-5390 Photos: DFKI, unless otherwise noted; Cover photo: Studio Banck Layout, Graphics: Christof Burgard; Production: One Vision Design
+Responsible: Heike Leonhard, Corporate Communications; Responsible for the translation: Michael Bruss, Corporate Communications Frequency of publication: Semi-annual, Newsletter online: www.dfki.de/newsletter
+22 Newsletter 1_2010 | © DFKI
