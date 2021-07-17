@@ -3,9 +3,8 @@ import os
 import click
 import cv2
 import pytesseract as tess
-from pdf2image import convert_from_path
-
 import utils
+from pdf2image import convert_from_path
 from utils import (
     check_verbose, get_text_from_image, post_process, pre_process,
     write_text_to_file

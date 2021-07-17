@@ -19,6 +19,8 @@ click = "^8.0.1"
 pytesseract = "^0.3.8"
 pdf2image = "^1.16.0"
 opencv-contrib-python = "^4.5.3"
+Pillow = "^8.3.1"
+tqdm = "^4.61.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

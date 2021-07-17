@@ -7,17 +7,13 @@ import cv2
 import nltk
 import pytesseract as tess
 import torch
+import tqdm
 from enchant.checker import SpellChecker
 from pytesseract import Output
 from pytorch_pretrained_bert import BertForMaskedLM, BertTokenizer
 
 DATA_FOLDER = './data/'
 en_spch = SpellChecker("en_US")
-
-try:
-    nltk.data.find('maxent_ne_chunker')
-except LookupError:
-    nltk.download('maxent_ne_chunker')
 
 
 def check_verbose(verbose):
@@ -33,21 +29,20 @@ def get_text_from_image(path):
     """Retrieve text data from image"""
     log.info("Processing an image...")
     img = cv2.imread(path)
-    log.info("Done image reading...")
-
+    img = cv2.copyMakeBorder(
+        img, 10, 10, 10, 10, cv2.BORDER_CONSTANT, value=(255, 255, 255, 255)
+    )
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = pre_process(img)
     log.info("Done pre-proccessing...")
-
-    text = tess.image_to_string(
-        img, lang='eng', config='--psm 6 --oem 3'
-    )  #TODO: experiment more with psm
+    text = tess.image_to_string(img, lang='eng', config='--psm 6 --oem 1')
     log.info("Done converting image to text...")
 
     result_text = post_process(text)
     log.info("Done post-processing...")
 
     log.info("Done processing")
-    return result_text
+    return text
 
 
 def write_text_to_file(text, file, out_mode='w'):
@@ -130,8 +125,7 @@ def predict_words(
 def getSkewAngle(cvImage) -> float:
     # Prep image, copy, convert to gray scale, blur, and threshold
     newImage = cvImage.copy()
-    gray = cv2.cvtColor(newImage, cv2.COLOR_BGR2GRAY)
-    blur = cv2.GaussianBlur(gray, (9, 9), 0)
+    blur = cv2.GaussianBlur(newImage, (9, 9), 0)
     thresh = cv2.threshold(
         blur, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
     )[1]
@@ -175,15 +169,16 @@ def rotateImage(cvImage, angle: float):
 
 def show_char_image_boxes(img):
     """Show word level bounding boxes in an image"""
-    d = tess.image_to_data(img, output_type=Output.DICT)
+    imcopy = img.copy()
+    d = tess.image_to_data(imcopy, output_type=Output.DICT)
     n_boxes = len(d['level'])
     for i in range(n_boxes):
         if (d['text'][i] != ""):
             (x, y, w,
              h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
-            cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            cv2.rectangle(imcopy, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-    cv2.imshow('result.png', img)
+    cv2.imshow('result.png', imcopy)
     cv2.waitKey(0)
 
 
@@ -191,9 +186,9 @@ def pre_process(img):
     """Apply preprocessing to an image"""
     angle = getSkewAngle(img)
     img = rotateImage(img, -1.0 * angle)
-    img = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    thresh = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY)[1]
+    img = cv2.resize(img, None, fx=4, fy=4, interpolation=cv2.INTER_CUBIC)
+    thresh = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY)[1]
+    show_char_image_boxes(thresh)
     return thresh
 
 

@@ -690,7 +690,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "da608c0ee7117a11d1c01a3ce1871afb1d765c907ef1a69d917b40a59ec5c1d3"
+content-hash = "3b611b31b63455a79be5ab51e8bde8744d533b5885706dd50b4952fa4f901d0d"
 
 [metadata.files]
 argparse = [
