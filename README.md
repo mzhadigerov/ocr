@@ -1,2 +1,1 @@
-# ocr
-Command line tool for OCR
+# Code is in master branch 
