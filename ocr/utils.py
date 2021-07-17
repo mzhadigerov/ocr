@@ -7,12 +7,10 @@ import cv2
 import nltk
 import pytesseract as tess
 import torch
-import tqdm
 from enchant.checker import SpellChecker
 from pytesseract import Output
 from pytorch_pretrained_bert import BertForMaskedLM, BertTokenizer
 
-DATA_FOLDER = './data/'
 en_spch = SpellChecker("en_US")
 
 
@@ -188,7 +186,6 @@ def pre_process(img):
     img = rotateImage(img, -1.0 * angle)
     img = cv2.resize(img, None, fx=4, fy=4, interpolation=cv2.INTER_CUBIC)
     thresh = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY)[1]
-    show_char_image_boxes(thresh)
     return thresh
 
 
@@ -228,34 +225,3 @@ def post_process(text):
     return predict_words(
         text_original, predictions, MASKIDS, tokenizer, suggestedwords
     )
-
-
-def load_images_from_folder(folder):
-    """Load images from folder"""
-    images = []
-    for filename in os.listdir(folder):
-        img = cv2.imread(os.path.join(folder, filename))
-        if img is not None:
-            images.append(img)
-    return images
-
-
-def load_txt_from_folder(folder):
-    """Load txt files from folder"""
-    txts = []
-    for file in os.listdir(folder):
-        # Check whether file is in text format or not
-        if file.endswith(".txt"):
-            file_path = f"{folder}\{file}"
-            with open(file_path, 'r') as f:
-                txts.append(f.read())
-    return txts
-
-
-#TODO: try other metrics
-def accuracy(ocr_text, true_text):
-    """Test accuracy of two texts using sequence matching"""
-    ocr_text = "".join(ocr_text.split("\n"))
-    true_text = "".join(true_text.split("\n"))
-    sequence = SequenceMatcher(None, true_text, ocr_text)
-    return sequence.ratio() * 100

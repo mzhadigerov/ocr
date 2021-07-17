@@ -1,12 +1,14 @@
 import os
 
 import click
+from pathlib import Path
 import cv2
+import logging as log
 import pytesseract as tess
 import utils
 from pdf2image import convert_from_path
 from utils import (
-    check_verbose, get_text_from_image, post_process, pre_process,
+    check_verbose, get_text_from_image,
     write_text_to_file
 )
 
@@ -25,7 +27,11 @@ def cli():
 def image2text(input, output, verbose):
     """Retrieve text data from image `input` and store in `output` text file"""
     check_verbose(verbose)
-
+    file = Path(input)
+    if not file.is_file():
+        err = f'File {input} not exists'
+        log.error(err)
+        raise Exception(err)
     if input.endswith(('jpg', 'jpeg', 'png')):
         text = get_text_from_image(input)
         write_text_to_file(text, output, 'w')
